@@ -15,3 +15,14 @@ class Class(models.Model):
     def save(self, *args, **kwargs):
         self.parallel_class = self.parallel_class.lower()
         super().save(*args, **kwargs)
+
+
+class Station(models.Model):
+    sport = models.CharField(max_length=50, verbose_name='Sportart')
+
+    class Meta:
+        verbose_name = 'Station'
+        verbose_name_plural = 'Stationen'
+
+    def __str__(self) -> str:
+        return self.sport
