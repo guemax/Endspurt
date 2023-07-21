@@ -11,3 +11,7 @@ class Class(models.Model):
 
     def __str__(self) -> str:
         return str(self.class_level) + self.parallel_class
+
+    def save(self, *args, **kwargs):
+        self.parallel_class = self.parallel_class.lower()
+        super().save(*args, **kwargs)
