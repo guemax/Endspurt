@@ -1,7 +1,7 @@
 # Endspurt
 
 *Endspurt* ist fortgeschrittenes Evaluationsprogramm zur Erfassung
-sowie Auswertung der Ergebnisse des Sportfestes.
+sowie Auswertung der Ergebnisse eines Sportfestes.
 
 Es wurde mit Python und Django erstellt und erlaubt das parallele
 Eintragen von Wertungen durch mehrere Helfer, indem diese die
