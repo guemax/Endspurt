@@ -40,7 +40,7 @@
       </nav>
     </header>
     <main class="container-fluid py-3">
-      <h1 class="display-5 mb-5">Ergebnisse nach Klassenstufen <i class="text-muted h4 fw-normal">(Letzte Aktualisierung um {% now "G:i" %} Uhr)</i></h1>
+      <h1 class="display-5 mb-5">Ergebnisse nach Klassenstufen <i class="text-muted h4 fw-normal">(Zuletzt aktualisiert um {% now "G:i" %} Uhr)</i></h1>
       {% for level, parallel_classes in scores.items %}
       <article class="mb-5">
         <h2 class="h3 fw-normal mb-3">{{level}}. Jahrgangsstufe</h2>
