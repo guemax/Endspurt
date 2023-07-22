@@ -24,8 +24,10 @@ Sie [hier](https://docs.djangoproject.com/en/4.2/howto/deployment/).
 Wir freuen uns über Ihr Interesse daran, *Endspurt* verbessern zu
 wollen.  Bitte besuchen Sie einen der folgenden Links, um...
 
- - [Einen Fehler zu melden](https://github.com/guemax/endspurt/issues/new)
- - [Sich eine neue Funktion zu wünschen](https://github.com/guemax/endspurt/issues/new)
+ - [Einen Fehler zu
+melden](https://github.com/guemax/Endspurt/issues/new?assignees=&labels=bug&projects=&template=bug_report.md&title=)
+ - [Sich eine neue Funktion zu
+   wünschen](https://github.com/guemax/Endspurt/issues/new?assignees=&labels=enhancement&projects=&template=feature_request.md&title=).
 
 Wenn Sie das Projekt sogar durch eigenen Programmcode unterstützen
 möchten, folgen Sie bitte [dieser Anleitung](CONTRIBUTING.md).
