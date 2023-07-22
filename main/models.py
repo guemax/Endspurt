@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Class(models.Model):
-    class_level = models.IntegerField(verbose_name='Klassenstufe')
+    class_level = models.PositiveIntegerField(verbose_name='Klassenstufe')
     parallel_class = models.CharField(max_length=1, verbose_name='Parallelklasse')
 
     class Meta:
@@ -32,7 +32,7 @@ class Assessment(models.Model):
     class_name = models.ForeignKey(Class, on_delete=models.RESTRICT, verbose_name='Klasse')
     station_name = models.ForeignKey(Station, on_delete=models.RESTRICT, verbose_name='Station')
 
-    score = models.IntegerField(verbose_name='Punktzahl')
+    score = models.PositiveIntegerField(verbose_name='Punktzahl')
 
     class Meta:
         verbose_name = 'Wertung'
