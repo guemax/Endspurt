@@ -63,6 +63,12 @@
           </tbody>
         </table>
       </article>
+      {% empty %}
+      <p style="max-width: 75ch;">Es wurden keine Wertungen gefunden. Wenn Sie Administrator
+      sind, so melden Sie sich bitte auf
+      der <a href="/admin">Adminseite</a> and und fügen Sie die erste
+      Wertung hinzu.
+      </p>
       {% endfor %}
     </main>
     <footer class="bg-primary text-white mt-auto">
