@@ -31,9 +31,9 @@
     </header>
     <main class="container-fluid py-3">
       <h1 class="display-5 mb-5">Ergebnisse nach Klassenstufen <i class="text-muted h4 fw-normal">(Letzte Aktualisierung um {% now "G:i" %} Uhr)</i></h1>
-      {% for class_level, class_scores in scores.items %}
+      {% for level, parallel_classes in scores.items %}
       <article class="mb-5">
-        <h2 class="h3 fw-normal mb-3">{{class_level}}. Jahrgangsstufe</h2>
+        <h2 class="h3 fw-normal mb-3">{{level}}. Jahrgangsstufe</h2>
         <table class="table table-striped table-responsive">
           <thead>
             <tr>
@@ -43,11 +43,11 @@
             </tr>
           </thead>
           <tbody>
-	    {% for parallel_class in class_scores %}
+	    {% for class in parallel_classes %}
             <tr>
-              <th scope="row">{{ parallel_class.ranking }}</th>
-              <td>{{ parallel_class.class }}</td>
-              <td>{{ parallel_class.score }}</td>
+              <th scope="row">{{ class.ranking }}</th>
+              <td>{{ class.name }}</td>
+              <td>{{ class.score }}</td>
             </tr>
 	  {% endfor %}
           </tbody>

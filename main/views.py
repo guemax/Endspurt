@@ -1,61 +1,78 @@
 from datetime import datetime
 import sys
 
-from django.db.models import Sum, Count
+from django.db.models import Sum
+from django.db.models.query import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
 from main.models import Class, Station, Assessment
 
 
+def get_class_levels() -> list[int]:
+    return sorted(set([x.class_level for x in Class.objects.all()]))
+
+
+def get_parallel_classes(level: int) -> QuerySet:
+    return Class.objects.filter(
+        class_level=level
+    ).order_by(
+        'class_level',
+        'parallel_class'
+    )
+
+
+def get_total_score(parallel_class: Class) -> int:
+    score = Assessment.objects.filter(
+        class_name=parallel_class
+    ).aggregate(
+        total=Sum('score')
+    )['total']
+
+    # Score can be None when there are no
+    # assessments for this parallel class
+    if score is None:
+        return 0
+
+    return score
+
+
 def index(request: HttpRequest) -> HttpResponse:
     scores = {}
-    
-    # Get class levels
-    classes = Class.objects.all()
-    class_levels = sorted(set([x.class_level for x in classes]))
-    print(class_levels)
 
-    for level in class_levels:
-        # Get parallel_classes
-        classes = Class.objects.filter(class_level=level).order_by('class_level', 'parallel_class')
-        print(classes)
+    for level in get_class_levels():
+        scores_for_level = []
 
-        scores_for_parallel_classes = []
+        for parallel_class in get_parallel_classes(level):
+            score = get_total_score(parallel_class)
+            scores_for_level.append({'name': str(parallel_class), 'score': score})
 
-        for parallel_class in classes:
-            # Get total score
-            score = Assessment.objects.filter(class_name=parallel_class).aggregate(total=Sum('score'))['total']
+        # Sort scores for class level descending by score
+        scores_for_level = sorted(
+            scores_for_level,
+            key=lambda x: x['score'],
+            reverse=True
+        )
 
-            if score is None:
-                score = 0
-                
-            print(score)
-
-            scores_for_parallel_classes.append({'class': str(parallel_class), 'score': score})
-
-        scores_for_parallel_classes = sorted(scores_for_parallel_classes, key=lambda x: x['score'], reverse=True)
-
-        # Calculate rankings
         previous_score = sys.maxsize
         previous_ranking = 0
 
-        for key, score in enumerate(scores_for_parallel_classes):
-            print(f'{score["class"]} with {score["score"]} points, previously {previous_score} point. Previous ranking: {previous_ranking}')
-            if score['score'] == previous_score:
-                print("Do not increment ranking")
-                score['ranking'] = previous_ranking
+        for key, parallel_class in enumerate(scores_for_level):
+            if parallel_class['score'] == previous_score:
+                parallel_class['ranking'] = previous_ranking
             else:
                 current_ranking = previous_ranking + 1
-                score['ranking'] = current_ranking
+                parallel_class['ranking'] = current_ranking
                 previous_ranking = current_ranking
 
-            previous_score = score['score']
-            scores_for_parallel_classes[key] = score
-                
+            previous_score = parallel_class['score']
+            scores_for_level[key] = parallel_class
 
-        scores[level] = sorted(scores_for_parallel_classes, key=lambda x: x['ranking'])
+        # Sort scores ascending by ranking
+        scores[level] = sorted(
+            scores_for_level,
+            key=lambda x: x['ranking']
+        )
 
-    print(scores)
     context = {'scores': scores}
     return render(request, 'main/index.html', context)
