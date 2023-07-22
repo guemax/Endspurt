@@ -122,6 +122,7 @@ STATIC_ROOT = BASE_DIR / 'static'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'node_modules/bootstrap/dist/css'),
+    os.path.join(BASE_DIR, 'icon'),
 )
 
 # Default primary key field type
