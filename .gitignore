@@ -161,3 +161,6 @@ cython_debug/
 
 # Emacs backup files
 *~
+
+# NPM dependencies
+node_modules/

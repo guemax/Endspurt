@@ -35,6 +35,7 @@ deactivate                # Deaktivieren
 ```shell
 # Virtuelle Umgebung sollte zuvor aktiviert worden sein!
 pip3 install -r requirements.txt
+npm install
 ```
 
 ### 3. Durchführen der Tests:
