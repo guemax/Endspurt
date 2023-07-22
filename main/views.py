@@ -37,7 +37,7 @@ def get_total_score(parallel_class: Class) -> int:
     return score
 
 
-def index(request: HttpRequest) -> HttpResponse:
+def get_scores() -> dict[list]:
     scores = {}
 
     for level in get_class_levels():
@@ -74,5 +74,9 @@ def index(request: HttpRequest) -> HttpResponse:
             key=lambda x: x['ranking']
         )
 
-    context = {'scores': scores}
+    return scores
+
+
+def index(request: HttpRequest) -> HttpResponse:
+    context = {'scores': get_scores()}
     return render(request, 'main/index.html', context)
