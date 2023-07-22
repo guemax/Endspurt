@@ -1,0 +1,22 @@
+{
+  "name": "endspurt",
+  "version": "0.1.0",
+  "description": "Fortgeschrittenes Evaluationsprogramm zur Erfassung sowie Auswertung der Ergebnisse eines Sportfestes",
+  "main": "index.js",
+  "scripts": {
+    "test": "python3 manage.py test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guemax/Endspurt.git"
+  },
+  "author": "guemax",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/guemax/Endspurt/issues"
+  },
+  "homepage": "https://github.com/guemax/Endspurt#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.0"
+  }
+}
