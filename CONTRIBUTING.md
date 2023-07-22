@@ -56,10 +56,9 @@ python3 manage.py runserver
 ```
 
 Nun können Sie Änderungen vornehmen, diese durch Commits registrieren
-und mittels eines Pull Requests einreichen.
-
-Falls Sie bisher wenig mit Git und/oder GitHub gearbeitet haben, hilft
-Ihnen vielleicht einer der folgenden Links weiter:
+und mittels eines Pull Requests einreichen.  Falls Sie bisher wenig
+mit Git und/oder GitHub gearbeitet haben, hilft Ihnen vielleicht einer
+der folgenden Links weiter:
 
  - [Einführung zu Git](https://git-scm.com/book/en/v2)
  - [Über Pull
