@@ -11,6 +11,32 @@
     <link rel="stylesheet" href="{% static 'bootstrap.css' %}">
   </head>
   <script>
+    function bottomOfPageReached() {
+	return (window.innerHeight + Math.round(window.pageYOffset)) >= document.body.offsetHeight;
+    }
+
+    function scrollUp() {
+	window.scrollTo(0, 0);
+    }
+
+    function scrollDown() {
+	window.scrollBy(0, 6);
+    }
+
+    function autoScroll() {
+	if (bottomOfPageReached()) {
+	    setTimeout(() => {
+		scrollUp();
+		autoScroll();
+	    }, 2000);
+	} else {
+	    scrollDown();
+	    setTimeout(() => {
+		autoScroll();
+	    }, 50);
+	}
+    }
+    
     function clock() {
 	var d = new Date();
 	document.querySelector("#clock").innerHTML = d.toLocaleTimeString("de-DE");
@@ -19,7 +45,11 @@
 	}, 500);
     }
   </script>
+  {% if autoscroll %}
+  <body class="min-vh-100 d-flex flex-column pt-5" onload="clock();autoScroll();">
+  {% else %}
   <body class="min-vh-100 d-flex flex-column pt-5" onload="clock();">
+  {% endif %}
     <header class="mb-5">
       <nav class="navbar fixed-top border-bottom-2 shadow bg-light">
 	<div class="container-fluid">
