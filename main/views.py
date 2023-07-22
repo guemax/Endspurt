@@ -78,10 +78,10 @@ def get_scores() -> dict[list]:
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    context = {'scores': get_scores()}
+    context = {'scores': get_scores(), 'autoscroll': False}
     return render(request, 'main/index.html', context)
 
 
 def scoreboard(request: HttpRequest) -> HttpResponse:
-    context = {'scores': get_scores()}
+    context = {'scores': get_scores(), 'autoscroll': True}
     return render(request, 'main/index.html', context)

@@ -45,7 +45,11 @@
 	}, 500);
     }
   </script>
+  {% if autoscroll %}
   <body class="min-vh-100 d-flex flex-column pt-5" onload="clock();autoScroll();">
+  {% else %}
+  <body class="min-vh-100 d-flex flex-column pt-5" onload="clock();">
+  {% endif %}
     <header class="mb-5">
       <nav class="navbar fixed-top border-bottom-2 shadow bg-light">
 	<div class="container-fluid">
