@@ -26,3 +26,17 @@ class Station(models.Model):
 
     def __str__(self) -> str:
         return self.sport
+
+
+class Assessment(models.Model):
+    class_name = models.ForeignKey(Class, on_delete=models.RESTRICT, verbose_name='Klasse')
+    station_name = models.ForeignKey(Station, on_delete=models.RESTRICT, verbose_name='Station')
+
+    score = models.IntegerField(verbose_name='Punktzahl')
+
+    class Meta:
+        verbose_name = 'Wertung'
+        verbose_name_plural = 'Wertungen'
+
+    def __str__(self) -> str:
+        return f'{self.class_name} bei Station {self.station_name}: {self.score} Punkte'
