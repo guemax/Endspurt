@@ -1,20 +1,25 @@
 # Mitwirken
 
-Wir freuen uns über Ihr Interesse daran, *Endspurt* verbessern zu
-wollen.  Sie können zum Beispiel einen [Fehler
-melden](https://github.com/guemax/endspurt/issues/new) oder sich eine
-neue [Funktion
-wünschen](https://github.com/guemax/endspurt/issues/new).
+Auf dieser Seite finden Sie eine Anleitung darüber, wie Sie durch
+eigenen Programmcode an *Endspurt* beitragen können. Sie können
+stattdessen auch einen [Fehler
+melden](https://github.com/guemax/Endspurt/issues/new?assignees=&labels=bug&projects=&template=bug_report.md&title=)
+oder sich eine neue [Funktion
+wünschen](https://github.com/guemax/Endspurt/issues/new?assignees=&labels=enhancement&projects=&template=feature_request.md&title=).
 
-Desweiteren können Sie ebenfalls mit eigenem Programmcode an dem
-Projekt beitragen.  Bitte folgen Sie hierfür der untenstehenden
-Anleitung, um direkt durchzustarten.
+## Herunterladen des Quelltextes
+
+Damit Sie *Endspurt* weiterentwickeln können, laden Sie sich zuerst
+den Quelltext herunter:
+
+```shell
+git clone https://github.com/guemax/Endspurt.git  # Mit Git
+gh repo clone guemax/Endspurt                     # Oder der GitHub CLI
+```
 
 ## Einrichten der Entwicklungsumgebung
 
-Wenn Sie die Webseite mit Hilfe eines Developmentservers auf Ihrem
-eigenen Rechner ausprobieren wollen, folgen Sie bitte folgenden
-Anweisungen:
+Nun richten Sie die Entwicklungsumgebung ein:
 
 ### 1. Aufsetzen einer virtuellen Umgebung für Python:
 
@@ -32,13 +37,10 @@ pip3 install -r requirements.txt
 npm install
 ```
 
-### 3. Durchführen der Tests:
+### 3. Erstellen eines Admin-Accounts
 
 ```shell
-# Sollte im Zweig 'main' immer problemlos klappen,
-# andere Zweige können, während der Entwicklungsphase,
-# hier einen oder mehrere Fehler produzieren.
-python3 manage.py test
+python3 manage.py createsuperuser
 ```
 
 ### 4. Anwenden der Datenbankmigrationen
@@ -47,27 +49,18 @@ python3 manage.py test
 python3 manage.py migrate
 ```
 
-### 5. Erstellen eines Admin-Accounts
-
-```shell
-python3 manage.py createsuperuser
-```
-
-### 6. Starten des Developmentservers:
+### 5. Starten des Developmentservers:
 
 ```shell
 python3 manage.py runserver
 ```
 
-## Entwicklungsprozess
+Nun können Sie Änderungen vornehmen, diese durch Commits registrieren
+und mittels eines Pull Requests einreichen.
 
-Alles beginnt mit einer Idee: Sei es ein Fehler, der behoben werden
-muss, sei es, dass eine Funktionalität implementiert werden soll, oder
-sei es, dass Sie im Quelltext eine Stelle gefunden haben, die sich
-effizienter oder schöner schreiben lässt.
+Falls Sie bisher wenig mit Git und/oder GitHub gearbeitet haben, hilft
+Ihnen vielleicht einer der folgenden Links weiter:
 
-Forken und Klonen Sie das Projekt, und fügen Sie Ihre Änderungen einem
-Git Commit hinzu.
-
-Es empfiehlt sich, frühzeitig einen Pull Request (ggf. als Draft) zu
-erstellen und so Feedback und Tips für die Umsetzung zu erhalten.
+ - [Einführung zu Git](https://git-scm.com/book/en/v2)
+ - [Über Pull
+   Requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
