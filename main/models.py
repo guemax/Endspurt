@@ -6,6 +6,7 @@ class Class(models.Model):
     parallel_class = models.CharField(max_length=1, verbose_name='Parallelklasse')
 
     class Meta:
+        ordering = ['class_level', 'parallel_class']
         verbose_name = 'Klasse'
         verbose_name_plural = 'Klassen'
 
