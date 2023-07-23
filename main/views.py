@@ -1,78 +1,66 @@
-from datetime import datetime
 import sys
 
 from django.db.models import Sum
-from django.db.models.query import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
-from main.models import Class, Station, Assessment
+import toml
+
+from main.models import Class, Assessment
 
 
-def get_class_levels() -> list[int]:
-    return sorted(set([x.class_level for x in Class.objects.all()]))
+def rankings() -> dict[int, list]:
+    rankings = {}
+    class_levels = sorted(set([int(str(x)[:-1]) for x in Class.objects.all()]))
+    
+    for level in class_levels:
+        parallel_classes = Class.objects.filter(class_name__contains=level)
+        rankings[level] = list()
+        
+        for _class in parallel_classes:
+            score = Assessment.objects.filter(class_name=_class).aggregate(Sum('score'))['score__sum']
+            score = score if score else 0
+            
+            rankings[level].append({'name': str(_class), 'score': score})
+
+    # Sort rankings ascending by class level and descending by score
+    rankings = dict((k, sorted(v, key=lambda x: x['score'],
+                               reverse=True),) for k, v in
+                    sorted(rankings.items()))
+
+    for level, classes in rankings.copy().items():
+        previous_ranking = 0
+        previous_score = sys.maxsize
+
+        for key, value in enumerate(classes):
+            current_score = value['score']
+
+            if previous_score == current_score:
+                current_ranking = previous_ranking
+            else:
+                current_ranking = previous_ranking + 1
+
+            rankings[level][key]['ranking'] = current_ranking
+            previous_ranking = current_ranking
+            previous_score = current_score
+
+    return rankings
 
 
-def get_parallel_classes(level: int) -> QuerySet:
-    return Class.objects.filter(
-        class_level=level
-    ).order_by(
-        'class_level',
-        'parallel_class'
-    )
-
-
-def get_total_score(parallel_class: Class) -> int:
-    score = Assessment.objects.filter(
-        class_name=parallel_class
-    ).aggregate(
-        total=Sum('score')
-    )['total']
-
-    # Score can be None when there are no
-    # assessments for this parallel class
-    if score is None:
-        return 0
-
-    return score
+def load_configuration() -> dict:
+    with open('config.toml', 'r') as f:
+        return toml.load(f)
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    scores = {}
+    context = {'scores': rankings(), 'config': load_configuration()}
+    return render(request, 'main/index.html', context)
 
-    for level in get_class_levels():
-        scores_for_level = []
 
-        for parallel_class in get_parallel_classes(level):
-            score = get_total_score(parallel_class)
-            scores_for_level.append({'name': str(parallel_class), 'score': score})
+def scoreboard(request: HttpRequest) -> HttpResponse:
+    context = {'scores': rankings(), 'config': load_configuration(), 'autoscroll': True}
+    return render(request, 'main/index.html', context)
 
-        # Sort scores for class level descending by score
-        scores_for_level = sorted(
-            scores_for_level,
-            key=lambda x: x['score'],
-            reverse=True
-        )
-
-        previous_score = sys.maxsize
-        previous_ranking = 0
-
-        for key, parallel_class in enumerate(scores_for_level):
-            if parallel_class['score'] == previous_score:
-                parallel_class['ranking'] = previous_ranking
-            else:
-                current_ranking = previous_ranking + 1
-                parallel_class['ranking'] = current_ranking
-                previous_ranking = current_ranking
-
-            previous_score = parallel_class['score']
-            scores_for_level[key] = parallel_class
-
-        # Sort scores ascending by ranking
-        scores[level] = sorted(
-            scores_for_level,
-            key=lambda x: x['ranking']
-        )
-
-    context = {'scores': scores}
+def scoreboard_with_autoreload(request: HttpRequest) -> HttpResponse:
+    context = {'scores': rankings(), 'config': load_configuration(), 'autoscroll': True, 'autoreload': True}
     return render(request, 'main/index.html', context)

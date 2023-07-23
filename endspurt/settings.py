@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-(@lfbi^qu6#ecuux*6jly82pl!enyw4+7w%#)yh_s74uefs9b2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.2.20"]
+ALLOWED_HOSTS = ["192.168.2.20", "127.0.0.1"]
 
 
 # Application definition
@@ -122,7 +122,8 @@ STATIC_ROOT = BASE_DIR / 'static'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'node_modules/bootstrap/dist/css'),
-    os.path.join(BASE_DIR, 'icon'),
+    os.path.join(BASE_DIR, 'files/icon'),
+    os.path.join(BASE_DIR, 'files/js'),
 )
 
 # Default primary key field type

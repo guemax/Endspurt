@@ -1,4 +1,4 @@
-# Endspurt
+# <img src="files/icon/icon.png" width=24 /> Endspurt
 
 *Endspurt* ist ein fortgeschrittenes Evaluationsprogramm zur Erfassung
 sowie Auswertung der Ergebnisse eines Sportfestes.
@@ -9,61 +9,40 @@ Ergebnisse auf der Django Adminseite registrieren.  Diese Wertungen
 werden mit einer Klasse sowie einer Sportart/Station verknüpft.
 Daraufhin lässt sich auf der Indexseite die Rangliste darstellen.
 
-## Fehler melden/Funktionen wünschen
+## Installation
+
+Um *Endspurt* zu installieren, folgen Sie bitte den [Anweisungen zum
+Einrichten einer
+Entwicklungsumgebung](CONTRIBUTING.md#einrichten-der-entwicklungsumgebung).
+Da diese Umgebung bei einem Fehler umfangreiche Debuginformationen
+ausspuckt, sollten Sie darüber nachdenken, Django für die
+Veröffentlichung zu konfigurieren.  Mehr Informationen darüber finden
+Sie [hier](https://docs.djangoproject.com/en/4.2/howto/deployment/).
+
+## Benutzung
+
+Unter untenstehenden Pfaden finden Sie folgende Seiten mit
+entsprechenden Funktionen:
+
+| Name | Pfad | Erklärung |
+|---|---|---|
+| Index | | Darstellung der Ergebnisse |
+| Anzeigetafel | /anzeigetafel/ | Darstellung der Ergebnisse mit automatischem Scrollen |
+| Anzeigetafel 2 | /anzeigetafel/automatisches-nachladen | Darstellung der Ergebnisse mit automatischem Scrollen und Nachladen |
+| Admin | /admin/ | Hinzufügen von Klassen, Stationen und Wertungen (Anmeldung mit Benutzerkonto, das mit `python3 manage.py createsuperuser`erstellt wurde) |
+
+## Mitwirken
 
 Wir freuen uns über Ihr Interesse daran, *Endspurt* verbessern zu
 wollen.  Bitte besuchen Sie einen der folgenden Links, um...
 
- - [Einen Fehler zu melden](https://github.com/guemax/endspurt/issues/new)
- - [Sich eine neue Funktion zu wünschen](https://github.com/guemax/endspurt/issues/new)
+ - [Einen Fehler zu
+melden](https://github.com/guemax/Endspurt/issues/new?assignees=&labels=bug&projects=&template=bug_report.md&title=)
+ - [Sich eine neue Funktion zu
+   wünschen](https://github.com/guemax/Endspurt/issues/new?assignees=&labels=enhancement&projects=&template=feature_request.md&title=)
 
-## Einrichten der Entwicklungsumgebung
-
-Wenn Sie die Webseite mit Hilfe eines Developmentservers auf Ihrem eigenen
-Rechner ausprobieren wollen, folgen Sie bitte folgenden Anweisungen:
-
-### 1. Aufsetzen einer virtuellen Umgebung für Python:
-
-```shell
-python3 -m venv venv      # Erstellen
-source venv/bin/activate  # Aktivieren
-deactivate                # Deaktivieren
-```
-
-### 2. Installieren der Abhängigkeiten:
-
-```shell
-# Virtuelle Umgebung sollte zuvor aktiviert worden sein!
-pip3 install -r requirements.txt
-npm install
-```
-
-### 3. Durchführen der Tests:
-
-```shell
-# Sollte im Zweig 'main' immer problemlos klappen,
-# andere Zweige können, während der Entwicklungsphase,
-# hier einen oder mehrere Fehler produzieren.
-python3 manage.py test
-```
-
-### 4. Anwenden der Datenbankmigrationen
-
-```shell
-python3 manage.py migrate
-```
-
-### 5. Erstellen eines Admin-Accounts
-
-```shell
-python3 manage.py createsuperuser
-```
-
-### 6. Starten des Developmentservers:
-
-```shell
-python3 manage.py runserver
-```
+Wenn Sie das Projekt sogar durch eigenen Programmcode unterstützen
+möchten, folgen Sie bitte [dieser Anleitung](CONTRIBUTING.md).
 
 ## Lizenz
 
