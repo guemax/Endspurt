@@ -4,6 +4,8 @@ from django.db.models import Sum
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
+import toml
+
 from main.models import Class, Assessment
 
 
@@ -45,15 +47,20 @@ def rankings() -> dict[int, list]:
     return rankings
 
 
+def load_configuration() -> dict:
+    with open('config.toml', 'r') as f:
+        return toml.load(f)
+
+
 def index(request: HttpRequest) -> HttpResponse:
-    context = {'scores': rankings()}
+    context = {'scores': rankings(), 'config': load_configuration()}
     return render(request, 'main/index.html', context)
 
 
 def scoreboard(request: HttpRequest) -> HttpResponse:
-    context = {'scores': rankings(), 'autoscroll': True}
+    context = {'scores': rankings(), 'config': load_configuration(), 'autoscroll': True}
     return render(request, 'main/index.html', context)
 
 def scoreboard_with_autoreload(request: HttpRequest) -> HttpResponse:
-    context = {'scores': rankings(), 'autoscroll': True, 'autoreload': True}
+    context = {'scores': rankings(), 'config': load_configuration(), 'autoscroll': True, 'autoreload': True}
     return render(request, 'main/index.html', context)
