@@ -1,4 +1,4 @@
-# <img src="icon/icon.png" width=24 /> Endspurt
+# <img src="files/icon/icon.png" width=24 /> Endspurt
 
 *Endspurt* ist ein fortgeschrittenes Evaluationsprogramm zur Erfassung
 sowie Auswertung der Ergebnisse eines Sportfestes.
