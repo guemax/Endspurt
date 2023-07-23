@@ -28,7 +28,7 @@ entsprechenden Funktionen:
 |---|---|---|
 | Index | | Darstellung der Ergebnisse |
 | Anzeigetafel | /anzeigetafel/ | Darstellung der Ergebnisse mit automatischem Scrollen |
-| Anzeigetafel 2 | /anzeigetafel/automatisches-nachladen | Darstellung der Ergebnisse mit automatischem Scrollen und Nachladen |
+| Anzeigetafel 2 | /anzeigetafel/automatisches-nachladen/ | Darstellung der Ergebnisse mit automatischem Scrollen und Nachladen |
 | Admin | /admin/ | Hinzufügen von Klassen, Stationen und Wertungen (Anmeldung mit Benutzerkonto, das mit `python3 manage.py createsuperuser`erstellt wurde) |
 
 ## Mitwirken
