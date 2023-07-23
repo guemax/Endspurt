@@ -5,14 +5,14 @@ from django.contrib import admin
 from .models import Class, Station, Assessment
 
 
-def get_choices() -> list:
-    return [(x, x,) for x in (*ascii_lowercase,)]
+ASCII_LOWERCASE = [
+    (x, x,) for x in (*ascii_lowercase,)
+]
 
 
 class ClassForm(forms.ModelForm):
-
-    parallel_class_lower_bound = forms.ChoiceField(choices=get_choices(), label='Parallelklasse',)
-    parallel_class_upper_bound = forms.ChoiceField(choices=get_choices(), label='Bis Paralleklasse')
+    parallel_class_lower_bound = forms.ChoiceField(choices=ASCII_LOWERCASE, label='Parallelklasse',)
+    parallel_class_upper_bound = forms.ChoiceField(choices=ASCII_LOWERCASE, label='Bis Paralleklasse')
     
     class Meta:
         model = Class
