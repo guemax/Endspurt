@@ -1,7 +1,7 @@
 from string import ascii_lowercase
 
 from django import forms
-from django.contrib import admin
+from django.contrib import admin, messages
 from .models import Class, Station, Assessment
 
 
@@ -34,6 +34,19 @@ class ClassAdmin(admin.ModelAdmin):
         }],
     ]
 
+    def response_add(self, request, obj, post_url_continue=None):
+        response = super().response_add(request, obj, post_url_continue)
+
+        # Remove default message
+        storage = messages.get_messages(request)
+        try:
+            del storage._queued_messages[-1]
+            print('Deleted')
+        except KeyError:
+            pass
+
+        return response
+
     def save_model(self, request, obj, form, change):
         lower = form.cleaned_data.get('parallel_class_lower_bound', None)
         upper = form.cleaned_data.get('parallel_class_upper_bound', None)
@@ -50,6 +63,16 @@ class ClassAdmin(admin.ModelAdmin):
             ) for parallel_class in range(ord(lower), ord(upper) + 1)
         ]
         Class.objects.bulk_create(classes)
+        
+        if len(classes) == 1:
+            message = f'Klasse „{str(classes[0])}“ wurde erfolgreich hinzugefügt.'
+        else:
+            message = f'Klassen „{str(classes[0])}“'
+            for class_ in classes[1:-2]:
+                message += f', „{str(class_)}“'
+            message += f'und „{str(classes[-1])}“ wurden erfolgreich hinzugefügt.'
+
+        messages.add_message(request, messages.INFO, message)
 
         
 class AssessmentAdmin(admin.ModelAdmin):
