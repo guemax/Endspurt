@@ -7,39 +7,38 @@ from django.shortcuts import render
 from main.models import Class, Assessment
 
 
-def rankings() -> dict[str, list]:
+def rankings() -> dict[int, list]:
     rankings = {}
+    class_levels = sorted(set([int(str(x)[:-1]) for x in Class.objects.all()]))
     
-    for level in sorted(set([int(str(x)[:-1]) for x in Class.objects.all()])):
+    for level in class_levels:
         parallel_classes = Class.objects.filter(class_name__contains=level)
         rankings[level] = list()
-
-        for class_ in parallel_classes:
-            score = Assessment.objects.filter(class_name=class_).aggregate(Sum('score'))['score__sum']
-
-            if score is None:
-                score = 0
-
-            rankings[level].append({'class': str(class_), 'score': score})
+        
+        for _class in parallel_classes:
+            score = Assessment.objects.filter(class_name=_class).aggregate(Sum('score'))['score__sum']
+            score = score if score else 0
+            
+            rankings[level].append({'class': str(_class), 'score': score})
 
     # Sort rankings ascending by class level and descending by score
     rankings = dict((k, sorted(v, key=lambda x: x['score'],
                                reverse=True),) for k, v in
                     sorted(rankings.items()))
 
-    for k, v in rankings.copy().items():
+    for level, classes in rankings.copy().items():
         previous_ranking = 0
         previous_score = sys.maxsize
 
-        for i, j in enumerate(v):
-            current_score = j['score']
+        for key, value in enumerate(classes):
+            current_score = value['score']
 
             if previous_score == current_score:
                 current_ranking = previous_ranking
             else:
                 current_ranking = previous_ranking + 1
 
-            rankings[k][i]['ranking'] = current_ranking
+            rankings[level][key]['ranking'] = current_ranking
             previous_ranking = current_ranking
             previous_score = current_score
 
