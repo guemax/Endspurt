@@ -1,7 +1,7 @@
 function bottomOfPageReached() {
-    return
-    (window.innerHeight + Math.round(window.pageYOffset))
-	>= document.body.offsetHeight;
+    return (
+	window.innerHeight + Math.round(window.pageYOffset)
+    ) >= document.body.offsetHeight;
 }
 
 function scrollUp() {
