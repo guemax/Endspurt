@@ -1,12 +1,10 @@
-from datetime import datetime
 import sys
 
 from django.db.models import Sum
-from django.db.models.query import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
-from main.models import Class, Station, Assessment
+from main.models import Class, Assessment
 
 
 def rankings() -> dict[str, list]:
