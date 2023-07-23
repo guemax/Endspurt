@@ -2,7 +2,7 @@ var hideColon = false;
 var seperator = ":";
 
 function clock() {
-    seperator = hideColon ? ":" : " ";
+    seperator = hideColon ? " " : ":";
     hideColon = hideColon ? false : true;
 
     var d = new Date();
