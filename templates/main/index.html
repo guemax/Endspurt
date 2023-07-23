@@ -65,8 +65,10 @@
 	}, 500);
     }
   </script>
-  {% if autoscroll %}
+  {% if autoscroll and autoreload %}
   <body class="min-vh-100 d-flex flex-column pt-5" onload="clock();autoScroll();automaticReload();">
+  {% elif autoscroll %}
+  <body class="min-vh-100 d-flex flex-column pt-5" onload="clock();autoScroll();">
   {% else %}
   <body class="min-vh-100 d-flex flex-column pt-5" onload="clock();">
   {% endif %}
