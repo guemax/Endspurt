@@ -53,8 +53,7 @@ class ClassAdmin(admin.ModelAdmin):
 
         if not ord(lower) < ord(upper):
             # User has only set the lower bound and seems to only
-            # want to create one records, not many classes at the
-            # same time.
+            # want to create one record, not many classes at once.
             upper = lower
 
         classes = [
