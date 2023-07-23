@@ -19,6 +19,18 @@ ausspuckt, sollten Sie darüber nachdenken, Django für die
 Veröffentlichung zu konfigurieren.  Mehr Informationen darüber finden
 Sie [hier](https://docs.djangoproject.com/en/4.2/howto/deployment/).
 
+## Benutzung
+
+Unter untenstehenden Pfaden finden Sie folgende Seiten mit
+entsprechenden Funktionen:
+
+| Name | Pfad | Erklärung |
+|---|---|---|
+| Index | | Darstellung der Ergebnisse |
+| Anzeigetafel | /anzeigetafel/ | Darstellung der Ergebnisse mit automatischem Scrollen |
+| Anzeigetafel 2 | /anzeigetafel/automatisches-nachladen | Darstellung der Ergebnisse mit automatischem Scrollen und Nachladen |
+| Admin | /admin/ | Hinzufügen von Klassen, Stationen und Wertungen (Anmeldung mit Benutzerkonto, das mit `python3 manage.py createsuperuser`erstellt wurde) |
+
 ## Mitwirken
 
 Wir freuen uns über Ihr Interesse daran, *Endspurt* verbessern zu
