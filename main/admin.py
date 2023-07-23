@@ -17,7 +17,7 @@ class ClassForm(forms.ModelForm):
     
     class Meta:
         model = Class
-        exclude = ['parallel_class']
+        exclude = ['']
 
     def save(self, commit=True):
         return super(ClassForm, self).save(commit=commit)
@@ -59,7 +59,7 @@ class ClassAdmin(admin.ModelAdmin):
             upper = lower
 
         classes = [
-            Class(class_name=f'{level}{chr(parallel_class)}', class_level=level, parallel_class=chr(parallel_class))
+            Class(class_name=f'{level}{chr(parallel_class)}')
             for parallel_class in range(ord(lower), ord(upper) + 1)
         ]
         print(classes)

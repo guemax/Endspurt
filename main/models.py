@@ -3,8 +3,6 @@ from django.db import models
 
 class Class(models.Model):
     class_name = models.CharField(max_length=3, verbose_name='Klasse', unique=True)
-    class_level = models.PositiveIntegerField(verbose_name='Klassenstufe')
-    parallel_class = models.CharField(max_length=1, verbose_name='Parallelklasse')
 
     class Meta:
         ordering = ['class_name']

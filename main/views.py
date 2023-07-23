@@ -10,16 +10,13 @@ from main.models import Class, Station, Assessment
 
 
 def get_class_levels() -> list[int]:
-    return sorted(set([x.class_level for x in Class.objects.all()]))
+    return sorted(set([x.class_name[:-1] for x in Class.objects.all()]))
 
 
 def get_parallel_classes(level: int) -> QuerySet:
     return Class.objects.filter(
-        class_level=level
-    ).order_by(
-        'class_level',
-        'parallel_class'
-    )
+        class_name__contains=level
+    ).order_by('class_name')
 
 
 def get_total_score(parallel_class: Class) -> int:
