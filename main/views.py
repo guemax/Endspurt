@@ -21,7 +21,7 @@ def rankings() -> dict[int, list]:
             score = Assessment.objects.filter(class_name=_class).aggregate(Sum('score'))['score__sum']
             score = score if score else 0
             
-            rankings[level].append({'class': str(_class), 'score': score})
+            rankings[level].append({'name': str(_class), 'score': score})
 
     # Sort rankings ascending by class level and descending by score
     rankings = dict((k, sorted(v, key=lambda x: x['score'],
