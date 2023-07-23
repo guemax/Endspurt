@@ -6,6 +6,7 @@ title = "Sportfest 2023 &ndash; Auswertung"
 
 [main]
 title = "Ergebnisse nach Klassenstufen"
+display_scoreboard_as_grid = true
 
 [footer]
 copyright_notice = "&copy; 2023 Team IT-Auswertung"

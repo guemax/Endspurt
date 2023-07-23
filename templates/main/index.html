@@ -43,7 +43,11 @@
       <h1 class="display-5 mb-5">{{ config.main.title|safe }}
 	<i class="text-muted h4 fw-normal">(Zuletzt aktualisiert um
 	  {% now "G:i" %}&nbsp;Uhr)</i></h1>
+      {% if config.main.display_scoreboard_as_grid %}
       <div class="row row-cols-1 row-cols-md-2 gx-4 gx-lg-5 gy-5 pt-3 pt-md-0">
+      {% else %}
+      <div class="row row-cols-1 gy-5 pt-3 pt-md-0">
+      {% endif %}
       {% for level, parallel_classes in scores.items %}
       <article class="mt-5 mb-2 pt-md-4 col">
         <h2 class="h3 fw-normal mb-4">{{level}}. Jahrgangsstufe</h2>
