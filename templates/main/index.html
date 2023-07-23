@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Sportfest 2023: Auswertung der Ergebnisse</title>
+    <title>{{ config.site.title|safe }}</title>
     
     <link rel="icon" href="{% static 'icon.ico' %}">
     <link rel="stylesheet" href="{% static 'bootstrap.css' %}">
@@ -24,7 +24,7 @@
 	<div class="container-fluid">
 	  <a class="navbar-brand mx-auto ms-sm-0" href="#">
 	    <img src="{% static 'icon.png' %}" alt="Logo" width="24" height="24" class="d-inline-block align-text-top shadow-sm">
-	    Sportfest 2023 &ndash; Auswertung</a>
+	    {{ config.header.title|safe }}</a>
 	  <div class="w-100 d-block d-sm-none"></div>
 	  <div class="navbar mx-auto me-sm-0">
 	    <ul class="navbar-nav">
@@ -40,9 +40,9 @@
     </header>
     <main class="container-fluid py-4 mb-2">
       <div class="d-block d-sm-none" style="min-height: 2.5rem;"></div>
-      <h1 class="display-5 mb-5">Ergebnisse nach
-      Klassenstufen <i class="text-muted h4 fw-normal">(Zuletzt
-      aktualisiert um {% now "G:i" %}&nbsp;Uhr)</i></h1>
+      <h1 class="display-5 mb-5">{{ config.main.title|safe }}
+	<i class="text-muted h4 fw-normal">(Zuletzt aktualisiert um
+	  {% now "G:i" %}&nbsp;Uhr)</i></h1>
       {% for level, parallel_classes in scores.items %}
       <article class="mb-5 pt-4">
         <h2 class="h3 fw-normal mb-4">{{level}}. Jahrgangsstufe</h2>
@@ -76,7 +76,9 @@
     <footer class="text-bg-primary mt-auto">
       <div class="row row-cols-1 row-cols-md-2 container-fluid py-3 pe-md-0">
 	<div class="col">
-	  <p class="mb-3 text-center text-md-start mb-md-0">&copy; 2023 Team IT-Auswertung</p>
+	  <p class="mb-3 text-center text-md-start mb-md-0">
+	    {{ config.footer.copyright_notice|safe }}
+	  </p>
 	</div>
 	<div class="col pe-md-0">
 	  <p class="mb-0 text-center text-md-end">Erstellt mit der
