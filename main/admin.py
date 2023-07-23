@@ -11,6 +11,7 @@ ASCII_LOWERCASE = [
 
 
 class ClassForm(forms.ModelForm):
+    class_level = forms.IntegerField(label='Klassenstufe')
     parallel_class_lower_bound = forms.ChoiceField(choices=ASCII_LOWERCASE, label='Parallelklasse',)
     parallel_class_upper_bound = forms.ChoiceField(choices=ASCII_LOWERCASE, label='Bis Paralleklasse')
     
@@ -48,6 +49,7 @@ class ClassAdmin(admin.ModelAdmin):
         return response
 
     def save_model(self, request, obj, form, change):
+        level = form.cleaned_data.get('class_level', None)
         lower = form.cleaned_data.get('parallel_class_lower_bound', None)
         upper = form.cleaned_data.get('parallel_class_upper_bound', None)
 
@@ -57,10 +59,10 @@ class ClassAdmin(admin.ModelAdmin):
             upper = lower
 
         classes = [
-            Class(class_level=obj.class_level,
-                  parallel_class=chr(parallel_class)
-            ) for parallel_class in range(ord(lower), ord(upper) + 1)
+            Class(class_name=f'{level}{chr(parallel_class)}', class_level=level, parallel_class=chr(parallel_class))
+            for parallel_class in range(ord(lower), ord(upper) + 1)
         ]
+        print(classes)
         Class.objects.bulk_create(classes)
         
         if len(classes) == 1:

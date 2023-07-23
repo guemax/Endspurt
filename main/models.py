@@ -2,20 +2,17 @@ from django.db import models
 
 
 class Class(models.Model):
+    class_name = models.CharField(max_length=3, verbose_name='Klasse', unique=True)
     class_level = models.PositiveIntegerField(verbose_name='Klassenstufe')
     parallel_class = models.CharField(max_length=1, verbose_name='Parallelklasse')
 
     class Meta:
-        ordering = ['class_level', 'parallel_class']
+        ordering = ['class_name']
         verbose_name = 'Klasse'
         verbose_name_plural = 'Klassen'
 
     def __str__(self) -> str:
-        return str(self.class_level) + self.parallel_class
-
-    def save(self, *args, **kwargs):
-        self.parallel_class = self.parallel_class.lower()
-        super().save(*args, **kwargs)
+        return self.class_name
 
 
 class Station(models.Model):
