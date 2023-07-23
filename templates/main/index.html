@@ -13,11 +13,11 @@
     <script src="{% static 'clock.js' %}"></script>
   </head>
   {% if autoscroll and autoreload %}
-  <body class="min-vh-100 d-flex flex-column pt-5" onload="clock();autoScroll();automaticReload();">
+  <body class="min-vh-100 d-flex flex-column pt-5 overflow-x-hidden" onload="clock();autoScroll();automaticReload();">
   {% elif autoscroll %}
-  <body class="min-vh-100 d-flex flex-column pt-5" onload="clock();autoScroll();">
+  <body class="min-vh-100 d-flex flex-column pt-5 overflow-x-hidden" onload="clock();autoScroll();">
   {% else %}
-  <body class="min-vh-100 d-flex flex-column pt-5" onload="clock();">
+  <body class="min-vh-100 d-flex flex-column pt-5 overflow-x-hidden" onload="clock();">
   {% endif %}
     <header class="mb-5">
       <nav class="navbar fixed-top border-bottom-2 shadow bg-light">
