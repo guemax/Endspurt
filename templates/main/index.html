@@ -23,10 +23,22 @@
 	window.scrollBy(0, 6);
     }
 
+    var reloadScheduled = false;
+
     function autoScroll() {
 	if (bottomOfPageReached()) {
 	    setTimeout(() => {
 		scrollUp();
+		if (reloadScheduled) {
+		    reloadScheduled = false;
+		    console.info("Unschedule automatic reloading of page.");
+		    // Timeout is necessary, otherwise browser will
+		    // think we haven't scrolled up yet and stay at
+		    // the bottom of the page forever.
+		    var t = setTimeout(() => {
+			location.reload();
+		    }, 500);
+		}
 		autoScroll();
 	    }, 2000);
 	} else {
@@ -35,6 +47,14 @@
 		autoScroll();
 	    }, 50);
 	}
+    }
+
+    function automaticReload() {
+	setTimeout(() => {
+	    console.info("Automatic reloading of page scheduled.");
+	    reloadScheduled = true;
+	    automaticReload();
+	}, 10000);
     }
     
     function clock() {
@@ -45,7 +65,9 @@
 	}, 500);
     }
   </script>
-  {% if autoscroll %}
+  {% if autoscroll and autoreload %}
+  <body class="min-vh-100 d-flex flex-column pt-5" onload="clock();autoScroll();automaticReload();">
+  {% elif autoscroll %}
   <body class="min-vh-100 d-flex flex-column pt-5" onload="clock();autoScroll();">
   {% else %}
   <body class="min-vh-100 d-flex flex-column pt-5" onload="clock();">
