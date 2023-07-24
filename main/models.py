@@ -14,7 +14,7 @@ class Class(models.Model):
 
 
 class Station(models.Model):
-    sport = models.CharField(max_length=50, verbose_name='Sportart')
+    sport = models.CharField(max_length=50, verbose_name='Sportart', unique=True)
 
     class Meta:
         verbose_name = 'Station'
