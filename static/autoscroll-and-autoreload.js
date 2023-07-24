@@ -9,7 +9,7 @@ function scrollUp() {
 }
 
 function scrollDown() {
-    window.scrollBy(0, 6);
+    window.scrollBy(0, scroll_speed_in_px);
 }
 
 var reloadScheduled = false;
@@ -34,7 +34,7 @@ function autoScroll() {
 	scrollDown();
 	setTimeout(() => {
 	    autoScroll();
-	}, 50);
+	}, scroll_update_timeout_in_ms);
     }
 }
 
@@ -43,5 +43,5 @@ function automaticReload() {
 	console.info("Automatic reloading of page scheduled.");
 	reloadScheduled = true;
 	automaticReload();
-    }, 10000);
+    }, reload_timeout_in_ms);
 }
