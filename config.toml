@@ -15,7 +15,7 @@ display_as_grid = true
 
 scroll_speed_in_px = 6
 scroll_update_timeout_in_ms = 50
-reload_timeout_in_ms = 10000
+reload_timeout_in_ms = 60000
 
 [footer]
 copyright_notice = "&copy; 2023 Team IT-Auswertung"
