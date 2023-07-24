@@ -9,12 +9,20 @@
     
     <link rel="icon" href="{% static 'icon.ico' %}">
     <link rel="stylesheet" href="{% static 'bootstrap.css' %}">
+    <script>
+      {% if config.header.clock.is_blinking %}
+      var colon_in_clock_should_blink = true;
+      {% endif %}
+      var scroll_speed_in_px = {{config.main.scoreboard.scroll_speed_in_px }};
+      var scroll_update_timeout_in_ms = {{config.main.scoreboard.scroll_update_timeout_in_ms }};
+      var reload_timeout_in_ms = {{ config.main.scoreboard.reload_timeout_in_ms }};
+    </script>
     <script src="{% static 'autoscroll-and-autoreload.js' %}"></script>
     <script src="{% static 'clock.js' %}"></script>
   </head>
-  {% if autoscroll and autoreload %}
+  {% if is_scoreboard and config.main.scoreboard.autoscroll and config.main.scoreboard.autoreload %}
   <body class="min-vh-100 d-flex flex-column pt-5 overflow-hidden" onload="clock();autoScroll();automaticReload();">
-  {% elif autoscroll %}
+  {% elif is_scoreboard and config.main.scoreboard.autoscroll %}
   <body class="min-vh-100 d-flex flex-column pt-5 overflow-hidden" onload="clock();autoScroll();">
   {% else %}
   <body class="min-vh-100 d-flex flex-column pt-5 overflow-x-hidden" onload="clock();">
@@ -43,7 +51,7 @@
       <h1 class="display-5 mb-5">{{ config.main.title|safe }}
 	<i class="text-muted h4 fw-normal">(Zuletzt aktualisiert um
 	  {% now "G:i" %}&nbsp;Uhr)</i></h1>
-      {% if config.main.display_scoreboard_as_grid %}
+      {% if config.main.scoreboard.display_as_grid %}
       <div class="row row-cols-1 row-cols-md-2 gx-4 gx-lg-5 gy-5 pt-3 pt-md-0">
       {% else %}
       <div class="row row-cols-1 gy-5 pt-3 pt-md-0">

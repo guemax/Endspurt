@@ -2,8 +2,10 @@ var hideColon = false;
 var separator = ":";
 
 function clock() {
-    separator = hideColon ? " " : ":";
-    hideColon = hideColon ? false : true;
+    if (colon_in_clock_should_blink) {
+	separator = hideColon ? " " : ":";
+	hideColon = hideColon ? false : true;
+    }
 
     var d = new Date();
     hours = String(d.getHours()).padStart(2, "0");

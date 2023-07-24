@@ -3,10 +3,19 @@ title = "Sportfest 2023: Auswertung der Ergebnisse"
 
 [header]
 title = "Sportfest 2023 &ndash; Auswertung"
+clock = { is_blinking = true }
 
 [main]
 title = "Ergebnisse nach Klassenstufen"
-display_scoreboard_as_grid = true
+
+[main.scoreboard]
+autoscroll = true
+autoreload = true
+display_as_grid = true
+
+scroll_speed_in_px = 6
+scroll_update_timeout_in_ms = 50
+reload_timeout_in_ms = 10000
 
 [footer]
 copyright_notice = "&copy; 2023 Team IT-Auswertung"
