@@ -60,7 +60,3 @@ def index(request: HttpRequest) -> HttpResponse:
 def scoreboard(request: HttpRequest) -> HttpResponse:
     context = {'scores': rankings(), 'config': load_configuration(), 'is_scoreboard': True}
     return render(request, 'main/index.html', context)
-
-def scoreboard_with_autoreload(request: HttpRequest) -> HttpResponse:
-    context = {'scores': rankings(), 'config': load_configuration(), 'is_scoreboard': True}
-    return render(request, 'main/index.html', context)

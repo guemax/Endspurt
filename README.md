@@ -29,8 +29,7 @@ entsprechenden Funktionen:
 | Name | Pfad | Erklärung |
 |---|---|---|
 | Index | | Darstellung der Ergebnisse |
-| Anzeigetafel | /anzeigetafel/ | Darstellung der Ergebnisse mit automatischem Scrollen |
-| Anzeigetafel 2 | /anzeigetafel/automatisches-nachladen/ | Darstellung der Ergebnisse mit automatischem Scrollen und Nachladen |
+| Anzeigetafel | /anzeigetafel/ | Darstellung der Ergebnisse mit automatischem Scrollen und Neuladen der Seite, kann in `config.toml` modifiziert werden |
 | Admin | /admin/ | Hinzufügen von Klassen, Stationen und Wertungen (Anmeldung mit Benutzerkonto, das mit `python3 manage.py createsuperuser`erstellt wurde) |
 
 ## Mitwirken
