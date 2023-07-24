@@ -21,9 +21,9 @@
     <script src="{% static 'clock.js' %}"></script>
   </head>
   {% if is_scoreboard and config.main.scoreboard.autoscroll and config.main.scoreboard.autoreload %}
-  <body class="min-vh-100 d-flex flex-column pt-5 overflow-hidden" onload="clock();autoScroll();automaticReload();">
+  <body class="min-vh-100 d-flex flex-column pt-5 overflow-hidden" style="cursor: none;" onload="clock();autoScroll();automaticReload();">
   {% elif is_scoreboard and config.main.scoreboard.autoscroll %}
-  <body class="min-vh-100 d-flex flex-column pt-5 overflow-hidden" onload="clock();autoScroll();">
+  <body class="min-vh-100 d-flex flex-column pt-5 overflow-hidden" style="cursor: none;" onload="clock();autoScroll();">
   {% else %}
   <body class="min-vh-100 d-flex flex-column pt-5 overflow-x-hidden" onload="clock();">
   {% endif %}
